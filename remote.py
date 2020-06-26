@@ -141,6 +141,7 @@ def music():
 # Functions
 
 # Music
+
 # Plays/ Pauses music
 @remote.route('/play_pause_music')
 def play_pause_music():
@@ -198,10 +199,27 @@ def next_song():
   # pass
 
 
+# Controller Type 1
+@remote.route('/controller_1')
+def controller_1():
+    return render_template('controller_1.html')
+
+@remote.route('/controller_1_left')
+def controller_1_left():
+    keyboard.press(keys['left'])
+    keyboard.release(keys['left'])
+    return redirect(url_for('controller_1'))
+
+@remote.route('/controller_1_right')
+def controller_1_right():
+    keyboard.press(keys['right'])
+    keyboard.release(keys['right'])
+    return redirect(url_for('controller_1'))
+
+
 # System Functions
 
 # Importing System Functions
-
 
 import os
 
