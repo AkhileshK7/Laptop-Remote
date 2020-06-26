@@ -136,7 +136,6 @@ def music():
 # Plays/ Pauses music
 @remote.route('/play_pause_music')
 def play_pause_music():
-    keyboard.press(keys['cmd_r'])
     keyboard.press(keys['f6'])
     keyboard.release(keys['f6'])
     return render_template('music.html')
