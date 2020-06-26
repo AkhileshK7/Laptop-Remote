@@ -4,8 +4,13 @@
   <div class="card">
     <div class="card-body">
       <h3>Music Player</h3>
+      <a href="{{  url_for('mute') }}" class="btn btn-primary">Mute</a>
+      <a href="{{  url_for('volume_down') }}" class="btn btn-primary">Volume Down</a>
+      <a href="{{  url_for('volume_up') }}" class="btn btn-primary">Volume Up</a>
+      <a href="{{  url_for('prev_song') }}" class="btn btn-primary">Previous Track</a>
       <a href="{{  url_for('play_pause_music') }}" class="btn btn-primary">Play/Pause</a>
-      <a href="#" class="btn btn-danger">Stop</a>
+      <a href="{{  url_for('next_song') }}" class="btn btn-primary">Next Track</a>
+      <!-- <a href="#" class="btn btn-danger">Stop</a> -->
     </div>
   </div>
 {% endblock %}

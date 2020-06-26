@@ -109,13 +109,21 @@ keys['y'] = 'y'
 keys['z'] = 'z'
 
 
+# Media Keys
+keys['play_pause'] = Key.media_play_pause
+keys['next_song'] = Key.media_next
+keys['prev_song'] = Key.media_previous
+keys['volume_up'] = Key.media_volume_up
+keys['volume_down'] = Key.media_volume_down
+keys['mute'] = Key.media_volume_mute
+
 keyboard = Controller()
 
 
 
 # Code for Web App
 
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, redirect
 
 
 remote = Flask(__name__)
@@ -136,52 +144,58 @@ def music():
 # Plays/ Pauses music
 @remote.route('/play_pause_music')
 def play_pause_music():
-    keyboard.press(keys['f6'])
-    keyboard.release(keys['f6'])
-    return render_template('music.html')
+    print('f6')
+    keyboard.press(keys['play_pause'])
+    keyboard.release(keys['play_pause'])
+    return redirect(url_for('music'))
     # pass
 
-# Stops music
-@remote.route('/stop_music')
-def stop_music():
-    keyboard.press(keys['f6'])
-    keyboard.release(keys['f6'])
-    pass
+# # Stops music
+# @remote.route('/stop_music')
+# def stop_music():
+#     keyboard.press(keys['f6'])
+#     keyboard.release(keys['f6'])
+#     pass
 
 # Increase Volume
 @remote.route('/volume_up')
 def volume_up():
-    keyboard.press(keys['f3'])
-    keyboard.release(keys['f3'])
-    pass
+    keyboard.press(keys['volume_up'])
+    keyboard.release(keys['volume_up'])
+    return redirect(url_for('music'))
+    # pass
 
 # Decrease Volume
 @remote.route('/volume_down')
 def volume_down():
-    keyboard.press(keys['f2'])
-    keyboard.release(keys['f2'])
-    pass
+    keyboard.press(keys['volume_down'])
+    keyboard.release(keys['volume_down'])
+    return redirect(url_for('music'))
+  # pass
 
 # Mute Volume
 @remote.route('/mute')
 def mute():
-    keyboard.press(keys['f1'])
-    keyboard.release(keys['f1'])
-    pass
+    keyboard.press(keys['mute'])
+    keyboard.release(keys['mute'])
+    return redirect(url_for('music'))
+  # pass
 
 # Previous Song
 @remote.route('/prev_song')
 def prev_song():
-    keyboard.press(keys['f5'])
-    keyboard.release(keys['f5'])
-    pass
+    keyboard.press(keys['prev_song'])
+    keyboard.release(keys['prev_song'])
+    return redirect(url_for('music'))
+  # pass
 
 # Next Song
 @remote.route('/next_song')
 def next_song():
-    keyboard.press(keys['f7'])
-    keyboard.release(keys['f7'])
-    pass
+    keyboard.press(keys['next_song'])
+    keyboard.release(keys['next_song'])
+    return redirect(url_for('music'))
+  # pass
 
 
 # System Functions
@@ -222,5 +236,5 @@ def lock_screen():
 
 # Self calling to run
 if __name__ == '__main__':
-    remote.run(debug=True) # debug
-    # remote.run(host='192.168.1.100', port=5010) # Final run on server http://192.168.1.100:5010
+    # remote.run(debug=True) # debug
+    remote.run(host='192.168.1.100', port=5010) # Final run on server http://192.168.1.100:5010
