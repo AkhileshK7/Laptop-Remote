@@ -1,6 +1,6 @@
 # Code to Initiate Web Server to Control Laptop from Phone
 
-# Importing Libraries
+# Importing Libraries for Input
 
 
 from pynput.keyboard import Key, Controller
@@ -111,83 +111,11 @@ keys['z'] = 'z'
 
 keyboard = Controller()
 
-# Functions
-
-# Music
-# Plays/ Pauses music
-def play_pause_music(arg):
-    keyboard.press(keys['f6'])
-    keyboard.release(keys['f6'])
-    pass
-
-# Stops music
-def stop_music(arg):
-    keyboard.press(keys['f6'])
-    keyboard.release(keys['f6'])
-    pass
-
-# Increase Volume
-def volume_up():
-    keyboard.press(keys['f3'])
-    keyboard.release(keys['f3'])
-    pass
-
-# Decrease Volume
-def volume_down():
-    keyboard.press(keys['f2'])
-    keyboard.release(keys['f2'])
-    pass
-
-# Mute Volume
-def mute():
-    keyboard.press(keys['f1'])
-    keyboard.release(keys['f1'])
-    pass
-
-# Previous Song
-def prev_song():
-    keyboard.press(keys['f5'])
-    keyboard.release(keys['f5'])
-    pass
-
-# Next Song
-def next_song():
-    keyboard.press(keys['f7'])
-    keyboard.release(keys['f7'])
-    pass
-
-# System Functions
-
-import os
-
-# Shut Down Laptop
-def shut_down():
-    os.system('shutdown /s /t 1')
-    pass
-
-# Restart Laptop
-def restart(arg):
-    os.system('shutdown /r /t 1')
-    pass
-
-# Sleep Laptop
-def sleep():
-    pass
-
-# Lock Screen
-def lock_screen():
-    keyboard.press['cmd']
-    keyboard.press['l']
-    keyboard.release['cmd']
-    keyboard.release['l']
-    pass
-
-
 
 
 # Code for Web App
 
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for
 
 
 remote = Flask(__name__)
@@ -201,6 +129,99 @@ def index():
 def music():
     return render_template('music.html')
 
+
+# Functions
+
+# Music
+# Plays/ Pauses music
+@remote.route('/play_pause_music')
+def play_pause_music():
+    keyboard.press(keys['cmd_r'])
+    keyboard.press(keys['f6'])
+    keyboard.release(keys['f6'])
+    return render_template('music.html')
+    # pass
+
+# Stops music
+@remote.route('/stop_music')
+def stop_music():
+    keyboard.press(keys['f6'])
+    keyboard.release(keys['f6'])
+    pass
+
+# Increase Volume
+@remote.route('/volume_up')
+def volume_up():
+    keyboard.press(keys['f3'])
+    keyboard.release(keys['f3'])
+    pass
+
+# Decrease Volume
+@remote.route('/volume_down')
+def volume_down():
+    keyboard.press(keys['f2'])
+    keyboard.release(keys['f2'])
+    pass
+
+# Mute Volume
+@remote.route('/mute')
+def mute():
+    keyboard.press(keys['f1'])
+    keyboard.release(keys['f1'])
+    pass
+
+# Previous Song
+@remote.route('/prev_song')
+def prev_song():
+    keyboard.press(keys['f5'])
+    keyboard.release(keys['f5'])
+    pass
+
+# Next Song
+@remote.route('/next_song')
+def next_song():
+    keyboard.press(keys['f7'])
+    keyboard.release(keys['f7'])
+    pass
+
+
+# System Functions
+
+# Importing System Functions
+
+
+import os
+
+# Shut Down Laptop
+@remote.route('/shutdown')
+def shut_down():
+    os.system('shutdown /s /t 1')
+    pass
+
+# Restart Laptop
+@remote.route('/restart')
+def restart():
+    os.system('shutdown /r /t 1')
+    pass
+
+# Sleep Laptop
+@remote.route('/sleep')
+def sleep():
+    pass
+
+# Lock Screen
+@remote.route('/lock_screen')
+def lock_screen():
+    keyboard.press['cmd']
+    keyboard.press['l']
+    keyboard.release['cmd']
+    keyboard.release['l']
+    pass
+
+
+
+
 # Self calling to run
 if __name__ == '__main__':
-    remote.run(debug=True)
+    remote.run(debug=True) # debug
+    # remote.run(host='192.168.1.100', port=5010) # Final run on server http://192.168.1.100:5010
