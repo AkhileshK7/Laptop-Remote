@@ -254,5 +254,5 @@ def lock_screen():
 
 # Self calling to run
 if __name__ == '__main__':
-    # remote.run(debug=True) # debug
-    remote.run(host='192.168.1.100', port=5010) # Final run on server http://192.168.1.100:5010
+    remote.run(debug=True) # debug
+    # remote.run(host='192.168.1.100', port=5010) # Final run on server http://192.168.1.100:5010
