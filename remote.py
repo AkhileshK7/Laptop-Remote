@@ -124,9 +124,12 @@ keyboard = Controller()
 # Code for Web App
 
 from flask import Flask, render_template, url_for, redirect
+from flask_scss import Scss
 
 
 remote = Flask(__name__)
+
+Scss(remote, static_dir='static', asset_dir='static')
 
 @remote.route('/')
 @remote.route('/index')
