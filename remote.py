@@ -124,12 +124,24 @@ keyboard = Controller()
 # Code for Web App
 
 from flask import Flask, render_template, url_for, redirect
-from flask_scss import Scss
-
 
 remote = Flask(__name__)
+port = 5010
 
-Scss(remote, static_dir='static', asset_dir='static')
+# Scss Compatibility
+
+# from flask_scss import Scss
+#
+# Scss(remote, static_dir='static', asset_dir='assets')
+
+# from flask_assets import Environment, Bundle
+#
+# assets = Environment(remote)
+# assets.url = remote.static_url_path
+# scss = Bundle('css/main.scss', '_sass/_base.scss', '_sass/_layout.scss', '_sass/_syntax-highlighting.scss', filters='pyscss', output='all.css')
+# assets.register('scss_all', scss)
+
+# Routes
 
 @remote.route('/')
 @remote.route('/index')
@@ -148,7 +160,6 @@ def music():
 # Plays/ Pauses music
 @remote.route('/play_pause_music')
 def play_pause_music():
-    print('f6')
     keyboard.press(keys['play_pause'])
     keyboard.release(keys['play_pause'])
     return redirect(url_for('music'))
@@ -253,9 +264,15 @@ def lock_screen():
     pass
 
 
+# Finding IP address
+
+import socket
+hostname = socket.gethostname()
+IPAddr = socket.gethostbyname(hostname)
 
 
 # Self calling to run
 if __name__ == '__main__':
-    remote.run(debug=True) # debug
-    # remote.run(host='192.168.1.100', port=5010) # Final run on server http://192.168.1.100:5010
+    # remote.run(debug=True) # debug
+    remote.run(host=IPAddr, port=port) # Final run on server http://192.168.1.100:5010
+    # remote.run(host='0.0.0.0', debug=True, port=5000)

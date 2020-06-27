@@ -4,14 +4,17 @@
 {% block main %}
   <div class="card">
     <div class="card-body">
-      <h3>Music Player</h3>
-      <a href="{{  url_for('mute') }}" class="btn btn-primary">Mute</a>
-      <a href="{{  url_for('volume_down') }}" class="btn btn-primary">Volume Down</a>
-      <a href="{{  url_for('volume_up') }}" class="btn btn-primary">Volume Up</a>
-      <a href="{{  url_for('prev_song') }}" class="btn btn-primary">Previous Track</a>
-      <a href="{{  url_for('play_pause_music') }}" class="btn btn-primary">Play/Pause</a>
-      <a href="{{  url_for('next_song') }}" class="btn btn-primary">Next Track</a>
-      <!-- <a href="#" class="btn btn-danger">Stop</a> -->
+      <h3 style="text-align:center">Music Player</h3>
+      <br>
+      <center>
+        <a href="{{  url_for('mute') }}" class="media-key"><img src="/static/assets/images/media/volume_mute.png"></a>
+        <a href="{{  url_for('volume_down') }}" class="media-key"><img src="/static/assets/images/media/volume_down.png"></a>
+        <a href="{{  url_for('volume_up') }}" class="media-key"><img src="/static/assets/images/media/volume_up.png"></a>
+        <a href="{{  url_for('prev_song') }}" class="media-key"><img src="/static/assets/images/media/prev_song.png"></a>
+        <a href="{{  url_for('play_pause_music') }}" class="media-key"><img src="/static/assets/images/media/play_pause.png"></a>
+        <a href="{{  url_for('next_song') }}" class="media-key"><img src="/static/assets/images/media/next_song.png"></a>
+      </center>
+      <!-- <a   href="#" class="btn btn-danger">Stop</a> -->
     </div>
   </div>
 {% endblock %}
